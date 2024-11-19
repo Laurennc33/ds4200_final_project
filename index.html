@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>University attended based on socioeconomic status</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Project overview</a></li>
+                <li><a href="plots.html" target="_blank" rel="noopener noreferrer">Visualizations</a></li>
+                <li><a href="summary.html" target="_blank" rel="noopener noreferrer">Summary</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h1>University attended based on socioeconomic standing</h1>
+
+    <h3>Introduction</h3>
+
+    <p>Economic diversity in higher education significantly influences student success, graduation rates, and future earnings. 
+    U.S. universities play a key role in shaping future generations, and students' socioeconomic backgrounds affect their academic and social experiences. 
+    While the relationship between economic background and academic outcomes has been studied, questions remain about how economic diversity impacts long-term success. 
+    This project analyzes the "Economic Diversity and Student Outcomes Data" from Kaggle, which includes information on economic composition, graduation rates, loan default rates, and post-graduation earnings at U.S. universities. 
+    By examining trends and correlations, the analysis aims to address educational inequities and improve support for under-resourced students, contributing to social mobility through education.</p>
+    
+
+    <h3>Introduction to the Data</h3>
+
+    <p>The dataset being used was found on Kaggle, which is a public forum for data scientists to share, find, and utilize datasets from across the internet. 
+        Users can publish datasets that they found on the web and provide information about the usability of the code and important metrics of the data, which is why it’s so helpful when finding datasets online to use. 
+        Kaggle gives a brief overview of the context of the data along with a ranking of the usability of the data, making it easier for us to sort out datasets that will be easier to use without extensive cleaning necessary. 
+        This particular dataset, though found on Kaggle, is sourced from Opportunity Insights, an initiative from Harvard University’s Economics department with a mission to use big data to identify barriers to economic opportunity across the United States. 
+        The compiled data we found was used in an article by the New York Times to analyze economic segregation in higher education, and takes place in 2024, making it extremely relevant.</p> 
+
+        <div class="center">
+            <table class="tg">
+                <thead>
+                  <tr>
+                    <th class="tg-0lax">Variable Name</th>
+                    <th class="tg-0lax">Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="tg-0lax">Rel_Apply</td>
+                    <td class="tg-0lax"></td>
+                  </tr>
+                  <tr>
+                    <td class="tg-0lax">Par_Income_Bin</td>
+                    <td class="tg-0lax"></td>
+                  </tr>
+                  <tr>
+                    <td class="tg-0lax">Tier</td>
+                    <td class="tg-0lax">The rated tier of the University</td>
+                  </tr>
+                  <tr>
+                    <td class="tg-0lax">Attend_Instate</td>
+                    <td class="tg-0lax"></td>
+                  </tr>
+                  <tr>
+                    <td class="tg-0lax">Attend_Oostate</td>
+                    <td class="tg-0lax"></td>
+                  </tr>
+                  <tr>
+                    <td class="tg-0lax"></td>
+                    <td class="tg-0lax"></td>
+                  </tr>
+                  <tr>
+                    <td class="tg-0lax"></td>
+                    <td class="tg-0lax"></td>
+                  </tr>
+                  <tr>
+                    <td class="tg-0lax"></td>
+                    <td class="tg-0lax"></td>
+                  </tr>
+                  <tr>
+                    <td class="tg-0lax"></td>
+                    <td class="tg-0lax"></td>
+                  </tr>
+                </tbody>
+                </table>
+            </div>
+
+        
+        
+        <p>Along with having an overview of the context, datasets on Kaggle are posted with an in-depth key for the columns of each dataset to make it more understandable. 
+        There are over 50 columns in the dataset we selected, but many of them are simply different ways of representing the same variable, or only exist for certain data points and thus will not be utilized in large-scale comparisons. 
+        For example, there are separate columns for the relative application rate by SAT score for each school, their standard error, and dependent on school ranking.
+        Continually, variables like the estimation for SAT scores in out of state students are only available in public school data, so they’ll be difficult to compare and normalize and likely won’t be used. 
+        One of our potential challenges in this dataset is that there are so many columns, as there will be a bit of work to be done in sorting through them to understand what is relevant to our goals in analyzing and presenting this data.</p>
+    
+    <h3>References</h3>
+
+    <p>To learn more about how ones socioeconomic status can affect the university they attend, our group referenced two different papers. The first paper we referenced was "The Miseducation of the Eliter" by Jennifer Morton. 
+        With the current debate about affirmative action and its effects on the futures of under-represented students, Jennifer M. Morton discusses in her paper The Miseducation of the Elite the high percentage of wealthy, 
+        top 1% students in the same elite universities that often funnel into some of the most influential positions in the US and why the diversity of these universities and positions of power need to be examined against how diverse their outcomes are.
+        You can access the paper here <a href="https://doi.org/10.1111/jopp.12208">The Miseducation of the Elite</a> to explore more of what Jennifer Morton has to say.</p>  
+        
+        <p>The second paper we refernced was "The Price of University: Economic Capital and the Experience of Underrepresented Students in an Elite US University" by Katherine Friend.
+        Why do lower-income students make up a smaller proportion of elite university student bodies? 
+        Katherine L. Friend’s book The Price of University: Economic Capital and the Experience of Underrepresented Students in an Elite US University discusses other social and financial constraints to elite university attendance by lower-income students. 
+        For example, limited financial aid packages, inaccessible activities, and student loan debt buildup and guilt.
+        You can access the paper here <a href="https://doi.org/10.1108/978-1-78754-651-620181011">The Price of University</a> to explore more of what Katherine Friend has to say.
+
+
+    </p>
+    
+</body>
+</html>
