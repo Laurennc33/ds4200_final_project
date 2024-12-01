@@ -5,7 +5,7 @@ import plotly.express as px
 import numpy as np
 
 
-data = pd.read_csv('college_admissions.csv')
+data = pd.read_csv('ds4200_final_project/college_admissions.csv')
 
 '''
 Interactive Plot 2: Map of Income and College Tier List
@@ -56,7 +56,7 @@ states = pd.DataFrame(states.items(), columns = ['name', 'state'])
 data = data.merge(states, on='name')
 
 # read in income data
-income = pd.read_csv('MedianHouseholdIncome2015.csv', encoding = 'latin1')
+income = pd.read_csv('ds4200_final_project/MedianHouseholdIncome2015.csv', encoding = 'latin1')
 
 income['Median Income'] = pd.to_numeric(income['Median Income'], errors='coerce')
 

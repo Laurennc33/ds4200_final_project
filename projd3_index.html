@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Attendance vs SAT Scores Visualization</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <style>
+    /* Tooltip Style */
+    .tooltip {
+      position: absolute;
+      text-align: center;
+      width: 150px;
+      height: auto;
+      padding: 5px;
+      font-size: 12px;
+      background-color: lightgray;
+      border-radius: 5px;
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    /* SVG Container Style */
+    svg {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    /* Title Style */
+    h2 {
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+    }
+
+    /* Paragraph Styling for Takeaway */
+    .takeaway {
+      width: 80%;
+      margin: 30px auto;
+      font-size: 16px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Attendance vs SAT Scores</h2>
+
+  <!-- SVG Container for the D3 Visualization -->
+  <svg id="scatterPlot"></svg>
+
+
+  <script>
+    // Load the data from CSV (adjust the path accordingly)
+    d3.csv("college_admissions.csv").then(function(data) {
+
+      // Check if data is loaded correctly
+      console.log(data);
+
+      // Filter and parse relevant fields, ensuring they are numeric
+      data = data.filter(d => !isNaN(d.attend) && !isNaN(d.attend_sat)); // Remove rows with invalid data
+      data.forEach(d => {
+        d.attend = +d.attend;         // Convert 'attend' to number
+        d.attend_sat = +d.attend_sat; // Convert 'attend_sat' to number
+      });
+
+      // Set the dimensions of the chart
+      const margin = {top: 40, right: 30, bottom: 40, left: 40}; // Increased top margin for title
+      const width = 800 - margin.left - margin.right;
+      const height = 600 - margin.top - margin.bottom;
+
+      // Append SVG element
+      const svg = d3.select("#scatterPlot")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+      // Define the X and Y scales
+      const x = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.attend)])  // Max value of 'attend'
+        .range([0, width]);
+
+      const y = d3.scaleLinear()
+        .domain([0, d3.max(data, d => d.attend_sat)])  // Max value of 'attend_sat'
+        .range([height, 0]);
+
+      // Add the scatter plot circles
+      svg.append("g")
+        .selectAll("circle")
+        .data(data)
+        .enter().append("circle")
+        .attr("cx", d => x(d.attend))
+        .attr("cy", d => y(d.attend_sat))
+        .attr("r", 5)
+        .style("fill", "#69b3a2")
+        .style("opacity", 0.7);
+
+      // Add X axis
+      svg.append("g")
+        .attr("transform", "translate(0," + height + ")")
+        .call(d3.axisBottom(x))
+        .append("text")
+        .attr("x", width / 2)
+        .attr("y", 35)
+        .attr("fill", "#000")
+        .style("text-anchor", "middle")
+        .text("Attendance Level");
+
+      // Add Y axis
+      svg.append("g")
+        .call(d3.axisLeft(y))
+        .append("text")
+        .attr("transform", "rotate(-90)")
+        .attr("y", -35)
+        .attr("x", -height / 2)
+        .attr("dy", "1em")
+        .attr("fill", "#000")
+        .style("text-anchor", "middle")
+        .text("SAT Score");
+
+      // Add Title (Adjust y position to prevent cutoff)
+      svg.append("text")
+        .attr("x", width / 2)
+        .attr("y", -20)  // Increased y position
+        .style("text-anchor", "middle")
+        .style("font-size", "20px")
+        .text("Relationship Between Attendance and SAT Scores");
+
+    }).catch(function(error) {
+      console.error("Error loading the data: ", error);
+    });
+
+  </script>
+</body>
+</html>

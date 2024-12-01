@@ -21,20 +21,17 @@
 
     <h3>Introduction</h3>
 
-    <p>Economic diversity in higher education significantly influences student success, graduation rates, and future earnings. 
-    U.S. universities play a key role in shaping future generations, and students' socioeconomic backgrounds affect their academic and social experiences. 
-    While the relationship between economic background and academic outcomes has been studied, questions remain about how economic diversity impacts long-term success. 
-    This project analyzes the "Economic Diversity and Student Outcomes Data" from Kaggle, which includes information on economic composition, graduation rates, loan default rates, and post-graduation earnings at U.S. universities. 
-    By examining trends and correlations, the analysis aims to address educational inequities and improve support for under-resourced students, contributing to social mobility through education.</p>
+    <p>The structure of higher education in the United States is heavily defined by its price point, with annual tuition and housing fees at some institutions reaching levels comparable to the average household income. 
+      As students at a university with an expected yearly cost of $90,250, we must critically assess the value of such a high-priced education and explore how increasing economic diversity within the student body can affect long-term outcomes. 
+      For this project, we sourced the "Economic Diversity and Student Outcomes Data" from Kaggle, which provides insights into economic composition, graduation rates, loan default rates, and post-graduation earnings at U.S. universities. 
+      Our goal is to analyze how economic diversity impacts university outcomes and identify institutions that prioritize this aspect. By examining trends and correlations in the data, we aim to better our understanding of educational inequities and spark a conversation about potential solutions to address these disparities.</p>
     
 
     <h3>Introduction to the Data</h3>
 
-    <p>The dataset being used was found on Kaggle, which is a public forum for data scientists to share, find, and utilize datasets from across the internet. 
-        Users can publish datasets that they found on the web and provide information about the usability of the code and important metrics of the data, which is why it’s so helpful when finding datasets online to use. 
-        Kaggle gives a brief overview of the context of the data along with a ranking of the usability of the data, making it easier for us to sort out datasets that will be easier to use without extensive cleaning necessary. 
-        This particular dataset, though found on Kaggle, is sourced from Opportunity Insights, an initiative from Harvard University’s Economics department with a mission to use big data to identify barriers to economic opportunity across the United States. 
-        The compiled data we found was used in an article by the New York Times to analyze economic segregation in higher education, and takes place in 2024, making it extremely relevant.</p> 
+    <p>This dataset was sourced on Kaggle, a public forum for data scientists to share, find, and utilize datasets from across the internet. Users publish datasets they found on the web and can provide information about the usability of the code and other metrics, making it easy to sort through lots of datasets to find one to use without the need for extensive cleaning. 
+      This dataset, though found on Kaggle, is sourced from Opportunity Insights, an initiative from Harvard University’s Economics department that aims to use big data to identify barriers to economic opportunity across the United States. The compiled data we found was used in an article by the New York Times to analyze economic segregation in higher education, and takes place in 2024, making it extremely relevant. 
+      </p> 
 
         <div class="center">
             <table class="tg">
@@ -47,39 +44,27 @@
                 <tbody>
                   <tr>
                     <td class="tg-0lax">Rel_Apply</td>
-                    <td class="tg-0lax"></td>
+                    <td class="tg-0lax">Relative application rate, calculated by adjusting score-sending rates to represent the proportion of all standardized test takers that send test scores to given colleges 
+                    </td>
                   </tr>
                   <tr>
                     <td class="tg-0lax">Par_Income_Bin</td>
-                    <td class="tg-0lax"></td>
+                    <td class="tg-0lax">Parent household income group based on percentile
+                    </td>
                   </tr>
                   <tr>
                     <td class="tg-0lax">Tier</td>
-                    <td class="tg-0lax">The rated tier of the University</td>
+                    <td class="tg-0lax">'Selective public' 'Highly selective public'  'Other elite schools (public and private)'
+                    </td>
                   </tr>
                   <tr>
                     <td class="tg-0lax">Attend_Instate</td>
-                    <td class="tg-0lax"></td>
+                    <td class="tg-0lax">Metric that adjusts attendance rates to reflect proportion of standardized test takers from in state who attend the institution
+                    </td>
                   </tr>
                   <tr>
                     <td class="tg-0lax">Attend_Oostate</td>
-                    <td class="tg-0lax"></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
-                  </tr>
-                  <tr>
-                    <td class="tg-0lax"></td>
-                    <td class="tg-0lax"></td>
+                    <td class="tg-0lax">Metric that adjusts attendance rates to reflect the proportion of standardized test takers from out of state who attend the institution.</td>
                   </tr>
                 </tbody>
                 </table>
