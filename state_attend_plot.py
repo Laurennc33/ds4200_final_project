@@ -23,3 +23,4 @@ oostate = alt.Chart(data).mark_bar(color='#F28E2B').encode(
 # plot next to each other
 state_attend_plot = instate | oostate
 state_attend_plot.save('state_attend_plot.png')
+
