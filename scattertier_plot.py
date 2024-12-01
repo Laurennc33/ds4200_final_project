@@ -5,7 +5,7 @@ import plotly.express as px
 import numpy as np
 
 
-data = pd.read_csv('college_admissions.csv')
+data = pd.read_csv('ds4200_final_project/college_admissions.csv')
 '''
 Interactive Visualization 1: Interactive Scatterplot
     Plots different tiers of colleges against income bin of attendees, allows users to examine each specific tier on its own.
@@ -29,7 +29,7 @@ scattertier = alt.Chart(data).mark_point().encode(
 ).properties(title = 'Application Rate and Income Bin', width = 500, height = 500).add_params(
     selection).transform_filter(selection)
 
-scattertier.save('scattertier.html')
+
 scattertier.show()
 
 

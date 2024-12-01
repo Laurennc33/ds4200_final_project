@@ -5,7 +5,7 @@ import plotly.express as px
 import numpy as np
 
 
-data = pd.read_csv('college_admissions.csv')
+data = pd.read_csv('ds4200_final_project/college_admissions.csv')
 '''
 Static Plot 1: In and Out of State Bar Graphs
     Compares income bracket with attendance to universities in state vs out of state
