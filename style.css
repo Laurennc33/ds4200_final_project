@@ -79,8 +79,8 @@ h1 {
 }
 
 .graph-rank {
-    width: 1200px;
-    height: 750px;
+    width: 100%;
+    height: 450px;
     border: none;
 }
 
@@ -91,7 +91,7 @@ h1 {
 }
 
 .graph-rate {
-    width: 700px;
+    width: 100%;
     height: 450px;
     border: none;
 }
