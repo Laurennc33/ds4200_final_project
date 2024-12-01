@@ -93,8 +93,8 @@
         .selectAll("circle")
         .data(data)
         .enter().append("circle")
-        .attr("cx", d => x(d.attend))
-        .attr("cy", d => y(d.attend_sat))
+        .attr("cx", d => x(d.attend_sat))
+        .attr("cy", d => y(d.attend))
         .attr("r", 5)
         .style("fill", "#69b3a2")
         .style("opacity", 0.7);
@@ -108,7 +108,7 @@
         .attr("y", 35)
         .attr("fill", "#000")
         .style("text-anchor", "middle")
-        .text("Attendance Level");
+        .text("SAT Score");
 
       // Add Y axis
       svg.append("g")
@@ -120,7 +120,7 @@
         .attr("dy", "1em")
         .attr("fill", "#000")
         .style("text-anchor", "middle")
-        .text("SAT Score");
+        .text("Attendance Rate");
 
       // Add Title (Adjust y position to prevent cutoff)
       svg.append("text")
