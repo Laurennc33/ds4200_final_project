@@ -67,6 +67,14 @@
         d.attend_sat = +d.attend_sat; // Convert 'attend_sat' to number
       });
 
+      const categories = [...new Set(data.map(d => d.tier))];
+
+      const colorScale = d3.scaleOrdinal()
+        .domain(categories)
+        .range(d3.schemeCategory10);
+
+
+
       // Set the dimensions of the chart
       const margin = {top: 40, right: 30, bottom: 40, left: 40}; // Increased top margin for title
       const width = 800 - margin.left - margin.right;
@@ -96,7 +104,7 @@
         .attr("cx", d => x(d.attend_sat))
         .attr("cy", d => y(d.attend))
         .attr("r", 5)
-        .style("fill", "#69b3a2")
+        .style("fill", d => colorScale(d.tier))
         .style("opacity", 0.7);
 
       // Add X axis
@@ -130,7 +138,27 @@
         .style("font-size", "20px")
         .text("Relationship Between Attendance and SAT Scores");
 
-    }).catch(function(error) {
+
+      // add legend
+    const legend = svg.append("g")
+      .attr("transform", `translate(${width - 190}, 20)`)
+      .selectAll("g")
+      .data(categories)
+      .enter().append("g")
+      .attr("transform", (d, i) => `translate(0, ${i * 20})`);
+
+    legend.append("circle")
+      .attr("r", 5)
+      .attr("fill", d => colorScale(d));
+
+    legend.append("text")
+      .attr("x", 10)
+      .attr("y", 5)
+      .text(d => d)
+      .style("font-size", "12px")
+      .attr("alignment-baseline", "middle");
+
+}).catch(function(error) {
       console.error("Error loading the data: ", error);
     });
 
