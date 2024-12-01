@@ -72,6 +72,13 @@ h1 {
     vertical-align: top;
 }
 
+.graph-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0;
+}
+
 .graph-bar {
     width: 700px;
     height: 400px;

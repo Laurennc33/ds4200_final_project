@@ -22,50 +22,55 @@
 
         <section class="visualization-section">
             <h2>Visualization 1: In and Out of State Attendance Bar Graphs</h2>
-            <iframe src="static_bar_graph.png" class="graph-bar" 
-                    title="In and Out of State Attendance Bar Graphs"></iframe>
+            <div class="graph-container">
+                <iframe src="static_bar_graph.png" class="graph-bar" 
+                        title="In and Out of State Attendance Bar Graphs"></iframe>
+            </div>
             <p>This visualization compares in-state and out-of-state school attendance rates by income bracket. It’s important to note that the data is not comprehensive, as the sample of universities is limited, and the attendance rate represents the sum of attendance percentages across specific income bins for the universities included. While these numbers are not universally applicable, they still allow for meaningful relative comparisons.</p>
                 
             <p>The comparison between in-state and out-of-state attendance rates across different income brackets reveals some interesting trends. For in-state attendance, the rates start relatively high and show a gradual increase until the 90th percentile, after which they drop back down at the highest income bracket. The variation in in-state attendance rates is generally not drastic, with a more consistent pattern across income groups. 
                 In contrast, out-of-state attendance remains relatively low until around the 75th percentile, where it experiences a sharp increase, and continues to increase alongside the income brackets. Both charts show minimal variation until about the 75th percentile, with more pronounced differences seen even with small changes in income. Overall, in-state attendance rates are consistently higher than out-of-state rates, but the latter sees a significant spike at higher income brackets.</p>
-                
         </section>
 
-        
         <section class="visualization-section">
             <h2>Visualization 2: Top Universities based on Rank</h2>
-            <iframe src="static_university_rank.png" class="graph-rank" 
-                    title="Top Universities based on Rank"></iframe>
+            <div class="graph-container">
+                <iframe src="static_university_rank.png" class="graph-rank" 
+                        title="Top Universities based on Rank"></iframe>
+            </div>
             <p>Each of the schools in the dataset were assigned a ranking score, which was an aggregation of the values for several variables, like attendance rate, application rate, and attendance rate. The bar chart displayed shows each school and its associated “ranking score”, sorted by the top 20 scores. This allows us to better digest the dataset and understand, through a lens that looks at multiple attributes, which schools perform the best. 
             </p>
         </section>
-        
+
         <section class="visualization-section">
             <h2>Interactive Map: List of College Tiers and Average Household Income by State </h2>
-            <iframe src="map.html" class="graph-map" 
-                    title="United States Map of Colleges"></iframe>
+            <div class="graph-container">
+                <iframe src="map.html" class="graph-map" 
+                        title="United States Map of Colleges"></iframe>
+            </div>
             <p>This choropleth map provides a quick overview of average household income across each state. When hovering over a state, a pop-up reveals the types of universities present there, adding interactivity that highlights regional educational opportunities. States with darker colors, like Mississippi, Oklahoma, and Alabama—which represent the lowest income levels—are exclusively home to "Selective public" institutions, the least prestigious category in this dataset. This suggests that for individuals born in these states, not only are financial barriers a significant challenge, but the local universities available to them also lack prestige. 
                 Given the difficulty of attending out-of-state schools, this limited access to prestigious universities compounds socioeconomic disadvantage. In contrast, wealthier states like New Jersey (#1), Maryland (#2) and Connecticut (#3) offer a variety of high-status schools, including Ivy Plus, Highly Selective Public, and other elite institutions. This map underscores the dual challenge of limited financial means and the challenges for low-income regions, with fewer prestigious opportunities for its residents. </p>
         </section>
 
         <section class="visualization-section">
             <h2>Visualization 3: Attendance and SAT scores</h2>
-            <iframe src="static_d3.png" class="graph-rate" 
-                    title="Application Rate and Income Bin"></iframe>
+            <div class="graph-container">
+                <iframe src="static_d3.png" class="graph-rate" 
+                        title="Application Rate and Income Bin"></iframe>
+            </div>
             <p>This visualization, created in D3, uses each school’s attendance rate and its SAT scores to create a scatter plot demonstrating the correlation between these two factors. Visually, we can see a positive correlation between the two, indicating that an increase in SAT scores directly will factor into an increase in attendance rates for students at the schools present in the dataset. By observing this trend, we can infer that a focus on academics prior to entering higher education (as SATs are typically taken prior to the college application process) will lend itself to a heightened drive for good attendance at these institutions. This is affirmed when looking at the types of schools that place higher on attendance rate and SAT scores. Ivy plus has the most prominent positive correlation, with some particularly high attendance rates and SAT scores, but other elite schools account for the remainder of high SAT scores. Interestingly, highly selective public schools seem to have a high attendance rate, without particularly high SAT scores. This plot, overall, can tell us a lot about the student bodies at different types of institutions, and indicates that institutional focus on attendance has a correlation with academic success. 
             </p>
         </section>
 
-
         <section class="visualization-section">
             <h2>Visualization 4: </h2>
-            <iframe src="" class="graph-income" 
-                    title="Income Bracket and Out of State Attendance"></iframe>
+            <div class="graph-container">
+                <iframe src="" class="graph-income" 
+                        title="Income Bracket and Out of State Attendance"></iframe>
+            </div>
             <p>This is a scatter plot of data on universities, with application rate being plotted against parental income bins. This shows us the range in application rate by parent income bin, and we can observe trends across these income bins in where application rates are clustered. The addition of a radio button allows us to filter by the schools tier, as defined by the dataset, and trends can further be investigated across income bins. We can see that overall, there appears to be more spread in application rate, with a higher maximum, at both the lower income bins and the higher income bins. When we investigate this further, this trend is the most even with highly selective public schools, with either extremes having similar ranges of application rate and the 50th- 85th income brackets having very clustered, small-range application rates for the universities displayed. For selective public schools, this range still demonstrates the bimodal pattern, but gradually the minimum and maximum increase with income bins. Other elite schools on the map continue at the large range at the poles, but the clustered 50-85th percentile, though staying the same width, begins to increase in range minimum and maximum by each step. 
             </p>
         </section>
     </main>
-
-   
 </body>
 </html>
