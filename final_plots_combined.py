@@ -1,15 +1,57 @@
+'''Final Visualizations Combined'''
+
 import pandas as pd
 import altair as alt
 import matplotlib.pyplot as plt
 import plotly.express as px
 import numpy as np
+import seaborn as sns
+
+data = pd.read_csv('college_admissions.csv')
+
+'''Plot 1: Static Bar Chart of In State vs Out of State University Attendance by Parent Income'''
 
 
-data = pd.read_csv('ds4200_final_project/college_admissions.csv')
+instate = alt.Chart(data).mark_bar(color='#4E79A7').encode(
+    alt.X('par_income_bin:N', title = 'Income Bracket (percentage)'),
+    alt.Y('attend_instate:Q', title = 'Attendance Rate')
+).properties(title = 'Income Bracket and In State Attendance')
 
-'''
-Interactive Plot 2: Map of Income and College Tier List
-'''
+oostate = alt.Chart(data).mark_bar(color='#F28E2B').encode(
+    alt.X('par_income_bin:N', title = 'Income Bracket (percentage)'),
+    alt.Y('attend_oostate:Q', title = 'Attendance Rate')
+).properties(title = 'Income Bracket and Out of State Attendance')
+
+# plot next to each other
+state_attend_plot = instate | oostate
+state_attend_plot.save('state_attend_plot.html')
+
+'''Plot 2: Interactive Scatter Plot of University Tiers and Attendance by Parent Income'''
+options = [None, 'Highly selective private', 'Highly selective public', 'Ivy Plus', 'Other elite schools (public and private)', 
+           'Selective private', 'Selective public']
+labels = ['All', 'Highly selective private', 'Highly selective public', 'Ivy Plus', 'Other elite schools (public and private)', 
+           'Selective private', 'Selective public']
+
+# selection options
+input_radio = alt.binding_radio(options = options, labels = labels, name = 'School Tier: ')
+selection = alt.selection_point(fields = ['tier'], bind = input_radio)
+
+#plot
+scattertier = alt.Chart(data).mark_point().encode(
+    alt.Y('rel_apply:Q', title = 'Application Rate', scale=alt.Scale(domain=[data['rel_apply'].min(), data['rel_apply'].max()])),
+    alt.X('par_income_bin:N', title = 'Income Bracket'),
+    alt.Color('tier'),
+    alt.Tooltip(['tier', 'par_income_bin'])
+).properties(title = 'Application Rate and Income Bin', width = 500, height = 500).add_params(
+    selection).transform_filter(selection)
+
+scattertier.save('scattertier.html')
+
+
+
+'''Plot 3: Interactive Map of Average Household Income and University Tiers by State'''
+
+
 states = {'American University': 'DC', 'Amherst College': 'MA', 'Auburn University': 'AL', 'Barnard College': 'NY', 'Bates College': 'ME', 
           'Baylor University': 'TX', 'Binghamton University': 'NY', 'Boston College': 'MA', 'Boston University': 'MA', 
           'Bowdoin College': 'ME', 'Brandeis University': 'MA','Brigham Young University': 'UT', 'Brown University': 'RI', 
@@ -32,7 +74,7 @@ states = {'American University': 'DC', 'Amherst College': 'MA', 'Auburn Universi
           'Santa Clara University': 'CA','Scripps College': 'CA','Southern Methodist University': 'TX','Stanford University': 'CA',
           'State University Of New York At Buffalo': 'NY','State University Of New York At Stony Brook': 'NY','Swarthmore College': 'PA',
           'Syracuse University': 'NY','Texas A&M University': 'TX','Texas Christian University': 'TX','Trinity College of Hartford, CT': 'CT',
-          'Tufts University': 'MA','University Of Alabama': 'AL','University Of Arkansas': 'AR','University Of California, Berkeley': 'CA',
+          'Tufts University': 'MA','University Of Alabama': 'AL','University Of Arkansas': 'AK','University Of California, Berkeley': 'CA',
           'University Of California, Davis': 'CA','University Of California, Irvine': 'CA',
           'University Of California, Los Angeles': 'CA','University Of California, Riverside': 'CA',
           'University Of California, San Diego': 'CA','University Of California, Santa Barbara': 'CA','University Of California, Santa Cruz': 'CA',
@@ -51,12 +93,13 @@ states = {'American University': 'DC', 'Amherst College': 'MA', 'Auburn Universi
           'Wake Forest University': 'NC','Washington And Lee University': 'VA','Washington University In St. Louis': 'MO',
           'Wellesley College': 'MA','Wesleyan University': 'CT','Whitman College': 'WA', 'Williams College': 'MA',
           'Worcester Polytechnic Institute': 'MA','Yale University': 'CT','Yeshiva University': 'NY'}
+
 # add states column
 states = pd.DataFrame(states.items(), columns = ['name', 'state'])
 data = data.merge(states, on='name')
 
 # read in income data
-income = pd.read_csv('ds4200_final_project/MedianHouseholdIncome2015.csv', encoding = 'latin1')
+income = pd.read_csv('MedianHouseholdIncome2015.csv', encoding = 'latin1')
 
 income['Median Income'] = pd.to_numeric(income['Median Income'], errors='coerce')
 
@@ -72,20 +115,73 @@ tier_df = pd.DataFrame({'state':tier_ls.index, 'list':tier_ls.values})
 
 data = data.merge(tier_df, on = 'state')
 
+school_ls = data.groupby('state')['name'].unique()
+school_ls_df = pd.DataFrame({'state': school_ls.index, 'school_list': school_ls.values})
+school_ls_df['school_list'] = school_ls_df['school_list'].apply(lambda x: ', '.join(x))
+
+data = data.merge(school_ls_df, on = 'state')
+
+def truncate_list(text, max_items=4):
+    items = text.split(', ')
+    return ', '.join(items[:max_items]) + '...' if len(items) > max_items else text
+
+data['school_list'] = data['school_list'].apply(truncate_list)
+
 # plot
 fig = px.choropleth(
-    data, 
-    locations = "state",
-    locationmode = 'USA-states',
-    scope = 'usa',
-    color = 'avg_inc', 
-    hover_name = 'state', 
-    hover_data = 'list',
-    color_continuous_scale= 'Viridis'
+    data,
+    locations='state',
+    locationmode='USA-states',
+    scope='usa',
+    color='avg_inc',
+    hover_name='state',
+    hover_data={
+        'list': True,
+        'school_list': True,
+        'avg_inc': True  # Keeps the avg_inc in hover
+    },
+    color_continuous_scale='Viridis'
 )
+
 fig.update_layout(title_text='List of College Tiers and Average Household Income by State')
 
 # Save the plot to an HTML file
 fig.write_html("map.html")
 
-fig.show()
+
+
+'''Plot 4: Static Bar Chart of Top University Ranks by Combined Score'''
+
+
+# Create a new column 'rank_score' by combining different factors
+# Here, we'll take the average of 'attend', 'attend_sat', and 'rel_apply'
+data['rank_score'] = data[['attend', 'attend_sat', 'rel_apply']].mean(axis=1)
+
+# Sort universities based on the 'rank_score'
+df_sorted = data[['name', 'rank_score']].sort_values(by='rank_score', ascending=False)
+
+# Assign ranks based on sorted order
+df_sorted['rank'] = range(1, len(df_sorted) + 1)
+
+# Limit the plot to the top N universities (e.g., top 20)
+top_n = 20
+df_top_n = df_sorted.head(top_n)
+
+# Plot the universities based on their rank score (not rank)
+plt.figure(figsize=(12, 8))  # Increase figure size for readability
+plt.barh(df_top_n['name'], df_top_n['rank_score'], color='skyblue')
+
+# Improve labels and title
+plt.xlabel('Combined Rank Score', fontsize=14)
+plt.ylabel('University', fontsize=14)
+plt.title(f'Top {top_n} Universities Based on Combined Rank Score', fontsize=16)
+
+
+
+# Adjust font size for better readability
+plt.xticks(fontsize=12)
+plt.yticks(fontsize=10)
+
+# Show the plot
+plt.tight_layout()  # Ensure everything fits within the plot
+plt.save('state_attend_plot.png')
