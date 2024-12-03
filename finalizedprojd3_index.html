@@ -48,7 +48,6 @@
   <!-- SVG Container for the D3 Visualization -->
   <svg id="scatterPlot"></svg>
 
-
   <script>
     // Load the data from CSV (adjust the path accordingly)
     d3.csv("college_admissions.csv").then(function(data) {
@@ -64,7 +63,7 @@
       });
 
       // Set the dimensions of the chart
-      const margin = {top: 40, right: 30, bottom: 40, left: 40}; // Increased top margin for title
+      const margin = {top: 40, right: 30, bottom: 40, left: 60}; // Increased left margin to 60
       const width = 800 - margin.left - margin.right;
       const height = 600 - margin.top - margin.bottom;
 
@@ -111,7 +110,7 @@
         .call(d3.axisLeft(y))
         .append("text")
         .attr("transform", "rotate(-90)")
-        .attr("y", -35)
+        .attr("y", -50) // Adjusted spacing for label visibility
         .attr("x", -height / 2)
         .attr("dy", "1em")
         .attr("fill", "#000")
@@ -129,7 +128,6 @@
     }).catch(function(error) {
       console.error("Error loading the data: ", error);
     });
-
   </script>
 </body>
 </html>
