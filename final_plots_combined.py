@@ -127,6 +127,20 @@ def truncate_list(text, max_items=4):
 
 data['school_list'] = data['school_list'].apply(truncate_list)
 
+sat_tier = {
+    'Ivy Plus': '1460-1510',
+    'Highly selective private': '1410-1460',
+    'Other elite schools (public and private)': '1290-1340', 
+    'Highly selective public': '1180-1230',
+    'Selective private': '1170-1220',
+    'Selective public': '1110-1160'
+}
+
+sat_df = pd.DataFrame(list(sat_tier.items()), columns=['tier', 'SATs'])
+
+
+data = data.merge(sat_df, on='tier')
+
 # plot
 fig = px.choropleth(
     data,
@@ -138,9 +152,10 @@ fig = px.choropleth(
     hover_data={
         'list': True,
         'school_list': True,
-        'avg_inc': True  # Keeps the avg_inc in hover
+        'avg_inc': True,
+        'SATs': True
     },
-    color_continuous_scale='Viridis'
+    color_continuous_scale='sunset'
 )
 
 fig.update_layout(title_text='List of College Tiers and Average Household Income by State')
@@ -184,4 +199,4 @@ plt.yticks(fontsize=10)
 
 # Show the plot
 plt.tight_layout()  # Ensure everything fits within the plot
-plt.save('state_attend_plot.png')
+plt.savefig('static_university_rank.png')
