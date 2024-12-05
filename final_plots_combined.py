@@ -11,18 +11,15 @@ data = pd.read_csv('college_admissions.csv')
 
 '''Plot 1: Static Bar Chart of In State vs Out of State University Attendance by Parent Income'''
 
-
-instate = alt.Chart(data).mark_bar(color='#4E79A7').encode(
-    alt.X('par_income_bin:N', title = 'Income Bracket (percentage)'),
-    alt.Y('attend_instate:Q', title = 'Attendance Rate')
+instate = alt.Chart(data).mark_boxplot(color='#4E79A7').encode(
+    alt.Y('attend_instate:Q', title = 'Attendance Rate Relative to Applications'),
+    alt.X('par_income_bin:N', title = 'Income Bracket (%)')
 ).properties(title = 'Income Bracket and In State Attendance')
 
-oostate = alt.Chart(data).mark_bar(color='#F28E2B').encode(
-    alt.X('par_income_bin:N', title = 'Income Bracket (percentage)'),
-    alt.Y('attend_oostate:Q', title = 'Attendance Rate')
+oostate = alt.Chart(data).mark_boxplot(color='#F28E2B').encode(
+    alt.Y('attend_oostate:Q', title = 'Attendance Rate Relative to Applications'),
+    alt.X('par_income_bin:N', title = 'Income Bracket (%)')
 ).properties(title = 'Income Bracket and Out of State Attendance')
-
-# plot next to each other
 state_attend_plot = instate | oostate
 state_attend_plot.save('state_attend_plot.html')
 
@@ -36,16 +33,32 @@ labels = ['All', 'Highly selective private', 'Highly selective public', 'Ivy Plu
 input_radio = alt.binding_radio(options = options, labels = labels, name = 'School Tier: ')
 selection = alt.selection_point(fields = ['tier'], bind = input_radio)
 
-#plot
+# main plot
 scattertier = alt.Chart(data).mark_point().encode(
     alt.Y('rel_apply:Q', title = 'Application Rate', scale=alt.Scale(domain=[data['rel_apply'].min(), data['rel_apply'].max()])),
     alt.X('par_income_bin:N', title = 'Income Bracket'),
     alt.Color('tier'),
     alt.Tooltip(['tier', 'par_income_bin'])
 ).properties(title = 'Application Rate and Income Bin', width = 500, height = 500).add_params(
-    selection).transform_filter(selection)
+    selection)
 
-scattertier.save('scattertier.html')
+app_boxplot = alt.Chart(data).mark_boxplot().encode(
+    alt.Y('rel_apply:Q', title='Application Rate', scale=alt.Scale(domain=[data['rel_apply'].min(), data['rel_apply'].max()])),
+    alt.X('tier:N', title='Selected Tier'),
+    alt.Color('tier'),
+    alt.Tooltip(['tier', 'rel_apply', 'par_income_bin'])
+).properties(width = 100, height = 500).transform_filter(selection) 
+
+
+# Combine scatter plot and box plot horizontally
+combined_chart = alt.hconcat(
+    scattertier,
+    app_boxplot
+).resolve_scale(
+    y='shared'  # Ensures the Y-axis is consistent between plots
+)
+
+combined_chart.save('scattertier.html')
 
 
 
