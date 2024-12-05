@@ -40,7 +40,7 @@ scattertier = alt.Chart(data).mark_point().encode(
     alt.Color('tier'),
     alt.Tooltip(['tier', 'par_income_bin'])
 ).properties(title = 'Application Rate and Income Bin', width = 500, height = 500).add_params(
-    selection)
+    selection).transform_filter(selection)
 
 app_boxplot = alt.Chart(data).mark_boxplot().encode(
     alt.Y('rel_apply:Q', title='Application Rate', scale=alt.Scale(domain=[data['rel_apply'].min(), data['rel_apply'].max()])),
