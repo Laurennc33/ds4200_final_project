@@ -6,6 +6,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import numpy as np
 import seaborn as sns
+import altair_viewer
 
 data = pd.read_csv('college_admissions.csv')
 
