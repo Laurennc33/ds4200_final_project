@@ -9,7 +9,7 @@ import seaborn as sns
 
 data = pd.read_csv('college_admissions.csv')
 
-'''Plot 1: Static Bar Chart of In State vs Out of State University Attendance by Parent Income'''
+'''Plot 1: Static Box Plot of In State vs Out of State University Attendance by Parent Income'''
 
 instate = alt.Chart(data).mark_boxplot(color='#4E79A7').encode(
     alt.Y('attend_instate:Q', title = 'Attendance Rate Relative to Applications'),
@@ -21,7 +21,7 @@ oostate = alt.Chart(data).mark_boxplot(color='#F28E2B').encode(
     alt.X('par_income_bin:N', title = 'Income Bracket (%)')
 ).properties(title = 'Income Bracket and Out of State Attendance')
 state_attend_plot = instate | oostate
-state_attend_plot.save('state_attend_plot.html')
+state_attend_plot.save('state_attend_plot.png')
 
 '''Plot 2: Interactive Scatter Plot of University Tiers and Attendance by Parent Income'''
 options = [None, 'Highly selective private', 'Highly selective public', 'Ivy Plus', 'Other elite schools (public and private)', 
