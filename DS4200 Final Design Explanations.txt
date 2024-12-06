@@ -1,0 +1,43 @@
+﻿Lauren Cummings, Ava Knight, Samara Shankar, Aarushi Attray
+
+
+Project:  Exploring Economic Diversity and Its Impact on Student Outcomes in U.S. Universities
+Link to published website: https://laurennc33.github.io/ds4200_final_project/
+
+
+DS4200 Final Design Explanations
+
+
+Visualization 1 (Static): In and Out of State Attendance Bar Graphs
+To demonstrate the difference in in-state and out-of-state attendance rate by income bin, this side-by-side bar graph was designed. Each row in the dataset represents a group of applicants to a school by in-state or out-of-state category, parent income bin, and attendance rate. This visualization was made by aggregating the attendance rates by income bin in in-state and out-of-state students, and the visualization demonstrated the attendance rates in each income group. The income bin groups were identical on both plots, but the y-axis was different, as there was overall just a significantly lower number of applicants to out-of-state schools. We chose to change the axis because the trend was what we wanted to emphasize, not the scale. We used different colors to differentiate each subplot, but within them all of the bars were coded with the same color. This was done to ensure that viewers were seeing the trend on each subplot as the phenomenon to observe, and that the comparison to be taken from it was the comparison of the two trends (in different colors). This design was finalized when we felt that it accurately conveyed what we wanted– that there is a very different trend in application rate by income bin for out-of-state schools and in-state schools. 
+
+
+Visualization 2 (Static): Top Universities based on Rank
+
+
+This visualization is designed to efficiently present the rankings of universities based on a combined metric (rank_score) calculated from three factors: attend, attend_sat, and rel_apply. The rank_score is computed as the mean of these variables to ensure all factors are equally weighted, providing a fair and holistic assessment. The data is then sorted in descending order based on rank_score, and a new column rank is created to reflect the sorted positions. The visualization is limited to the top 20 universities to focus on the most notable entries. We used a horizontal bar (using the matplotlib library) chart to display the rankings, with the university names on the y-axis and their corresponding ranks on the x-axis as this layout enhances readability and emphasizes the ranked order. The y-axis is inverted so that the highest-ranked university appears at the top, aligning with conventional ranking displays. The chart includes adjusting font sizes for readability and a concise layout to ensure clarity. A preview of the top entries is also printed to verify the rankings. We decided on this specific design as it effectively combines data analysis and visualization to communicate insights about university rankings based on the selected factors.
+
+
+Visualization 3 (Interactive): List of College Tiers and Average Household Income by State
+We had to add a secondary dataset of average household income by state to visualize the difference in university opportunities by state income bracket. To visualize this, we created an interactive choropleth map that color-codes each state to its average household income, with darker shaded states representing a higher income level. 
+
+
+To add in college admission information, we added a set of data to pop up by state on mouse hover. Each state expands when hovered over to display a list of variables and their values, including the name of the state. The primary information displayed is the types of institution by tier (selective/more selective, public/private, ivy etc). Following this list is a list of the actual institutions present that are represented in this tier list. The last variable in the hover list is the range of SAT scores from test takers in this state. 
+
+
+Overall, we designed this visualization so that the lower and higher range of income by household would stand out, and users would be drawn to these and be able to hover over and view the data. By allowing users to see all of the data and interact with it, conclusions are typically more profound because users are finding it out for themselves rather than being told. This is why we used the choropleth and the information expansion, to draw them to the two poles of the dataset and understand the magnitude of the difference in colleges offered by state incomes. 
+
+
+Visualization 4 (Static): Attendance vs. SAT scores
+This visualization is designed to explore the relationship between college attendance levels and SAT scores using an interactive scatter plot created with D3.js. 
+We used a scatter plot visualization to effectively represent the relationship between attendance levels and SAT scores as it presents the data in a clean and intuitive layout. We chose a scatter plot as it is well-suited for showing relationships between two quantitative variables, where each data point corresponds to a specific attendance level (x-axis) and SAT score (y-axis). The circles representing the data points are designed with a moderate size and semi-transparent fill to avoid overcrowding and enhance visibility when points overlap.
+The chart dimensions, with a width of 800 pixels and a height of 600 pixels, ensure that the data is clearly and largely displayed. We had to repeatedly adjust the margins ( now set to { top: 40, right: 30, bottom: 40, left: 60 }), to make sure there was ample space for axis labels and prevent any visual elements from being clipped. The left margin is slightly larger to accommodate the rotated y-axis label. Additionally, the axes are labeled with descriptive text: "Attendance Level" for the x-axis and "SAT Score" for the y-axis. The x-axis label is positioned below the axis for easy readability, while the y-axis label is rotated and offset sufficiently from the axis to avoid overlapping. The axes also include tick marks and labels generated dynamically based on the data range, ensuring that the plot remains relevant to the dataset being visualized. 
+
+
+Visualization 5 (Interactive): Income Bracket vs. Application Rate 
+
+
+To continue exploring the difference in application rate by income group, we created an interactive visualization to look at the difference in application rate for different college “tiers” by income bin. The tiers represent the prestige of certain universities, and allow us to understand how different income groups are accessing differing levels of prestige. The x-axis is sorted by income group of applicants, while the y-axis represents the application rate. Each point on this plot represents a university, and application rate to that university from college applicants in the income group specified. 
+
+
+To add in the variable of the university income bin, we added color coding and a radio button to differentiate each school’s tier. We designed the radio button to isolate each tier, so that with one visualization multiple trends could be analyzed – the trend of overall application rate by income bin, but then each individual trend within the school tiers. An added effect is that when filtering by school tier, one can visualize the difference in amount of schools represented by each tier.
